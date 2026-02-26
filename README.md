@@ -1,37 +1,58 @@
-# stock-info-app
+# Stock Info App
 
-一个可部署到 Cloudflare 的 A 股查询小应用：
+基于 Cloudflare 的 A 股查询应用：输入股票代码，查询当前价、平均年化、分红率、股息率等。数据来自东方财富，带容灾与缓存。
 
-- 前端：React + Vite
-- 后端：Hono.js + Cloudflare Workers
-- 输入股票代码，查询当前价、平均年化、分红率、股息率
-- 数据源：东方财富
-- 容灾：东方财富不可用时自动回退腾讯行情，仍失败则回退缓存旧值
+## 技术栈
+
+| 模块 | 技术 |
+|------|------|
+| 前端 | React 19 + Vite 7 |
+| 后端 | Hono + TypeScript，部署于 Cloudflare Workers |
+| 数据 | 东方财富（主）→ 腾讯行情（回退）→ 缓存旧值 |
 
 ## 项目结构
 
-- `web`：前端页面
-- `api`：接口服务
-- `docs`：口径与部署文档
-
-## 使用 pnpm
-
-```bash
-pnpm install --no-frozen-lockfile
-pnpm dev:api
-pnpm dev:web
+```
+stock-info-app/
+├── api/          # Hono API（Cloudflare Workers）
+├── web/          # React 前端（Vite）
+├── scripts/      # 部署脚本
+└── docs/         # 部署与指标口径文档
 ```
 
-默认 `pnpm dev:api` 使用 Node 本地模式（更适合本机联调）。
-如需 Worker 本地模拟：`pnpm dev:api:worker`。
+## 快速开始
 
-## 测试与检查
+**环境**：Node.js ≥ 18，pnpm（推荐 10.25+，`corepack enable && corepack prepare pnpm@10.25.0 --activate`）
 
 ```bash
-pnpm lint
-pnpm test
-pnpm build:web
+pnpm install
+pnpm dev:api   # 终端 A：API @ http://localhost:8787
+pnpm dev:web   # 终端 B：前端 @ http://localhost:5173
 ```
 
-部署说明见 `docs/deploy-cloudflare.md`。
+浏览器打开 http://localhost:5173，前端会通过 Vite 代理将 `/api` 请求转发到 API。
 
+## 常用命令
+
+| 命令 | 说明 |
+|------|------|
+| `pnpm dev:api` | 启动 API（Wrangler 本地 Workers） |
+| `pnpm dev:web` | 启动前端开发服务器 |
+| `pnpm lint` | 类型检查 + ESLint |
+| `pnpm test` | 运行 API 单元测试 |
+| `pnpm build:web` | 构建前端到 `web/dist/` |
+| `pnpm deploy` | 一键部署 API + Web 到 Cloudflare |
+| `pnpm deploy:api` | 仅部署 API |
+| `pnpm deploy:web` | 仅部署 Web（需手动指定 `VITE_API_BASE_URL`） |
+
+## 部署与文档
+
+- **部署**：详见 [docs/deploy-cloudflare.md](docs/deploy-cloudflare.md)
+- **指标口径**：平均年化、股息率、分红率等说明见 [docs/metrics.md](docs/metrics.md)
+
+## 线上地址（示例）
+
+- **API**：https://stock-info-api.2768505574.workers.dev  
+- **Web**：https://stock-info-web.pages.dev  
+
+（实际地址以部署输出或 Cloudflare 控制台为准。）
