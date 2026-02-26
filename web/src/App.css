@@ -1,0 +1,256 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(56, 189, 248, 0.08), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(99, 102, 241, 0.06), transparent);
+}
+
+.card {
+  width: min(960px, 100%);
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  margin: 8px 0 24px;
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.queryForm {
+  display: flex;
+  gap: 10px;
+}
+
+.stockInput {
+  flex: 1;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 12px 14px;
+  color: #f1f5f9;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.stockInput::placeholder {
+  color: #64748b;
+}
+
+.stockInput:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+button:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 8px;
+  color: #fca5a5;
+  font-size: 14px;
+}
+
+.result {
+  margin-top: 28px;
+}
+
+.result h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.item {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 10px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+
+.item:hover {
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+.item span {
+  color: #64748b;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.item strong {
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #e2e8f0;
+}
+
+.valueUp {
+  color: #f87171 !important;
+}
+
+.valueDown {
+  color: #4ade80 !important;
+}
+
+.notes {
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.notes p {
+  margin: 3px 0;
+}
+
+.yearlySection {
+  margin-top: 24px;
+}
+
+.yearlySection h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.3px;
+}
+
+.yearlyTableWrap {
+  overflow-x: auto;
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 10px;
+}
+
+.yearlyTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(30, 41, 59, 0.4);
+}
+
+.yearlyTable th,
+.yearlyTable td {
+  padding: 10px 14px;
+  text-align: right;
+  font-size: 13px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+}
+
+.yearlyTable th:first-child,
+.yearlyTable td:first-child {
+  text-align: left;
+}
+
+.yearlyTable thead th {
+  background: rgba(15, 23, 42, 0.6);
+  color: #64748b;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  position: sticky;
+  top: 0;
+}
+
+.yearlyTable tbody tr {
+  transition: background 0.15s;
+}
+
+.yearlyTable tbody tr:hover {
+  background: rgba(56, 189, 248, 0.04);
+}
+
+.yearlyTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.yearlyTable .cellUp {
+  color: #f87171;
+}
+
+.yearlyTable .cellDown {
+  color: #4ade80;
+}
+
+.yearlyTable .cellNeutral {
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 20px 16px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "stock-info-app",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.25.0",
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "build:web": "pnpm --filter web build",
+    "build:api": "pnpm --filter api exec wrangler deploy --dry-run --minify",
+    "lint": "pnpm --parallel --filter web --filter api lint",
+    "test": "pnpm --filter api test",
+    "deploy": "bash scripts/deploy.sh all",
+    "deploy:api": "bash scripts/deploy.sh api",
+    "deploy:web": "bash scripts/deploy.sh web"
+  }
+}
